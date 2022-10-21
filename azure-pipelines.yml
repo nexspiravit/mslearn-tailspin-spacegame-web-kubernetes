@@ -49,7 +49,7 @@ stages:
     displayName: 'Deploy job'
     pool:
       vmImage: 'ubuntu-20.04'
-    environment: 'ci-cd-test'
+    environment: 'rj-openshift.ci-cd-test'
     variables:
     - group: Release
     steps:
