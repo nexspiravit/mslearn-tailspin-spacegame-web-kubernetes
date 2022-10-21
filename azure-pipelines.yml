@@ -41,7 +41,7 @@ stages:
     - publish: '$(Build.SourcesDirectory)/manifests'
       artifact: manifests 
 
-  - stage: 'Deploy'
+- stage: 'Deploy'
   displayName: 'Deploy the containers'
   dependsOn: Build
   jobs:
