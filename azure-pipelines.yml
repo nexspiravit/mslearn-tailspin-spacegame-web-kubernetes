@@ -50,7 +50,7 @@ stages:
       vmImage: 'ubuntu-20.04'
     environment: 'rj-openshift-env.ci-cd-test'
     variables:
-    - group: Release
+    - group: 'rj-openshift-vg'
     strategy:
       runOnce:
         deploy:
