@@ -48,7 +48,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: 'ubuntu-18.04'
-    environment: 'rj-openshift.ci-cd-test'
+    environment: 'rj-openshift-env.ci-cd-test'
     variables:
     - group: Release
     strategy:
