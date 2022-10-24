@@ -15,7 +15,7 @@ stages:
   - job: 'Build'
     displayName: 'Build job'
     pool:
-      name: 'Default'
+      name: 'Azure Pipelines'
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
@@ -48,7 +48,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy
     pool:
-      name: 'Default'
+      name: 'Azure Pipelines'
       vmImage: 'ubuntu-latest'
     environment: 'rj-openshift-env.ci-cd-test'
     variables:
