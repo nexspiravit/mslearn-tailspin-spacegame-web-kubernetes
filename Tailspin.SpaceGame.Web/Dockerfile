@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
 # Serve on port 8080, we cannot serve on port 80 with a custom user that is not root.
 ENV ASPNETCORE_URLS=http://+:8080
