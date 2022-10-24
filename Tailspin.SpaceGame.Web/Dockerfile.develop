@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 ARG BUILD_CONFIGURATION=Debug
 ENV ASPNETCORE_ENVIRONMENT=Development
-ENV ASPNETCORE_URLS=http://+:80
+ENV ASPNETCORE_URLS=http://+:8080
 ENV DOTNET_USE_POLLING_FILE_WATCHER=true
-EXPOSE 80
+EXPOSE 8080
 
 WORKDIR /src
 COPY ["Tailspin.SpaceGame.Web/Tailspin.SpaceGame.Web.csproj", "Tailspin.SpaceGame.Web/"]
