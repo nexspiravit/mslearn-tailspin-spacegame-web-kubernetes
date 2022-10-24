@@ -58,32 +58,32 @@ stages:
        appName: $(WebAppName)
        azureSubscription: 'Resource Manager - Tailspin - Space Game'
        imageName: $(RegistryName)/$(webRepository):$(build.buildId)
-     strategy:
-      runOnce:
-        deploy:
-          steps:
-          - download: current
-            artifact: manifests
-          - task: KubernetesManifest@0
-            displayName: Create imagePullSecret
-            inputs:
-              action: createSecret
-              secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'Container Registry Connection'
-              kubernetesServiceConnection: 'rj-openshift-ci-cd-test-1666332965555'
-              namespace: 'ci-cd-test'
+       strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: manifests
+            - task: KubernetesManifest@0
+              displayName: Create imagePullSecret
+              inputs:
+                action: createSecret
+                secretName: $(imagePullSecret)
+                dockerRegistryEndpoint: 'Container Registry Connection'
+                kubernetesServiceConnection: 'rj-openshift-ci-cd-test-1666332965555'
+                namespace: 'ci-cd-test'
               
-          - task: KubernetesManifest@0
-            displayName: Deploy to Kubernetes cluster
-            inputs:
-              action: deploy
-              kubernetesServiceConnection: 'rj-openshift-ci-cd-test-1666332965555'
-              namespace: 'default'
-              manifests: |
-                $(Pipeline.Workspace)/manifests/deployment.yml
-                $(Pipeline.Workspace)/manifests/service.yml
-              imagePullSecrets: |
-                $(imagePullSecret)
-              containers: |
-                $(RegistryName)/$(webRepository):$(tag)
-                $(RegistryName)/$(leaderboardRepository):$(tag)
+            - task: KubernetesManifest@0
+              displayName: Deploy to Kubernetes cluster
+              inputs:
+                action: deploy
+                kubernetesServiceConnection: 'rj-openshift-ci-cd-test-1666332965555'
+                namespace: 'default'
+                manifests: |
+                  $(Pipeline.Workspace)/manifests/deployment.yml
+                  $(Pipeline.Workspace)/manifests/service.yml
+                imagePullSecrets: |
+                  $(imagePullSecret)
+                containers: |
+                  $(RegistryName)/$(webRepository):$(tag)
+                  $(RegistryName)/$(leaderboardRepository):$(tag)
