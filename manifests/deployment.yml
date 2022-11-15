@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: rjopenshift.azurecr.io/web
+          image: dbgacr.azurecr.io/web
           ports:
           - containerPort: 8080
 ---
@@ -34,6 +34,6 @@ spec:
     spec:
       containers:
         - name: leaderboard
-          image: rjopenshift.azurecr.io/leaderboard
+          image: dbgacr.azurecr.io/leaderboard
           ports:
           - containerPort: 8080
