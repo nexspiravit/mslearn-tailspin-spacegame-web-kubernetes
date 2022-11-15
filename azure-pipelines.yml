@@ -24,7 +24,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(webRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.Web/Dockerfile'
-        containerRegistry: 'rj-openshift-az-container'
+        containerRegistry: 'rj-openshift-registry'
         tags: |
           $(tag)
     - task: Docker@2
@@ -34,7 +34,7 @@ stages:
         buildContext: $(Build.Repository.LocalPath)
         repository: $(leaderboardRepository)
         dockerfile: '$(Build.SourcesDirectory)/Tailspin.SpaceGame.LeaderboardContainer/Dockerfile'
-        containerRegistry: 'rj-openshift-az-container'
+        containerRegistry: 'rj-openshift-registry'
         tags: |
           $(tag)
     - publish: '$(Build.SourcesDirectory)/manifests'
@@ -48,7 +48,7 @@ stages:
     displayName: Deploy
     pool:
       vmImage: 'ubuntu-20.04'
-    environment: 'rj-openshift-env.ci-cd-test'
+    environment: 'openshift-demo.rj-openshift'
     variables:
     - group: 'rj-openshift-vg'
     strategy:
@@ -62,14 +62,14 @@ stages:
             inputs:
               action: createSecret
               secretName: $(imagePullSecret)
-              dockerRegistryEndpoint: 'rj-openshift-az-container'
-              kubernetesServiceConnection: 'rj-openshift-env-ci-cd-test-1666585628601'
+              dockerRegistryEndpoint: 'rj-openshift-registry'
+              kubernetesServiceConnection: 'openshift-demo-rj-openshift-1668489267923'
               namespace: 'ci-cd-test'            
           - task: KubernetesManifest@0
             displayName: Deploy to Kubernetes cluster
             inputs:
               action: deploy
-              kubernetesServiceConnection: 'rj-openshift-env-ci-cd-test-1666585628601'
+              kubernetesServiceConnection: 'openshift-demo-rj-openshift-1668489267923'
               namespace: 'ci-cd-test'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
