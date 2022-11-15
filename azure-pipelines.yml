@@ -70,7 +70,7 @@ stages:
             inputs:
               action: deploy
               kubernetesServiceConnection: 'openshift-demo-rj-openshift-1668489267923'
-              namespace: 'ci-cd-test'
+              namespace: 'rj-openshift'
               manifests: |
                 $(Pipeline.Workspace)/manifests/deployment.yml
                 $(Pipeline.Workspace)/manifests/service.yml
